@@ -116,7 +116,7 @@ class Feed extends Component {
     });
     const formData = new FormData();
     formData.append("title", postData.title);
-    formData.append("content", postData.title);
+    formData.append("content", postData.content);
     formData.append("image", postData.image);
     let url = "http://localhost:8080/feed/post";
     let method = "POST";
@@ -138,7 +138,6 @@ class Feed extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
         const post = {
           _id: resData.post._id,
           title: resData.post.title,
@@ -194,7 +193,6 @@ class Feed extends Component {
         return res.json();
       })
       .then((resData) => {
-        console.log(resData);
         this.setState((prevState) => {
           const updatedPosts = prevState.posts.filter((p) => p._id !== postId);
           return { posts: updatedPosts, postsLoading: false };
