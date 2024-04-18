@@ -1,0 +1,3 @@
+Comando para ser utilizado no frontend antes do npm start
+
+$env:NODE_OPTIONS = "--openssl-legacy-provider"
