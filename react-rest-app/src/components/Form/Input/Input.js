@@ -2,6 +2,7 @@ import React from 'react';
 
 import './Input.css';
 
+
 const input = props => (
   <div className="input">
     {props.label && <label htmlFor={props.id}>{props.label}</label>}
@@ -15,7 +16,6 @@ const input = props => (
         id={props.id}
         required={props.required}
         value={props.value}
-        placeholder={props.placeholder}
         onChange={e => props.onChange(props.id, e.target.value, e.target.files)}
         onBlur={props.onBlur}
       />

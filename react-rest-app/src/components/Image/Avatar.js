@@ -3,6 +3,7 @@ import React from 'react';
 import Image from './Image';
 import './Avatar.css';
 
+
 const avatar = props => (
   <div
     className="avatar"

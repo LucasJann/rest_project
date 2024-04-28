@@ -8,6 +8,7 @@ import Image from '../../Image/Image';
 import { required, length } from '../../../util/validators';
 import { generateBase64FromImage } from '../../../util/image';
 
+
 const POST_FORM = {
   title: {
     value: '',
