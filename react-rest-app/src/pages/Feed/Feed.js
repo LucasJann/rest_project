@@ -139,6 +139,8 @@ class Feed extends Component {
       url = "http://localhost:8080/feed/post/" + this.state.editPost._id;
       method = "PUT";
     }
+
+    console.log(formData)
     fetch(url, {
       method: method,
       body: formData,
