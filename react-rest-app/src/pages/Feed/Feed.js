@@ -41,45 +41,44 @@ class Feed extends Component {
     this.loadPosts();
   }
 
-  loadPosts = (direction) => {
+  loadPosts = direction => {
     if (direction) {
       this.setState({ postsLoading: true, posts: [] });
     }
     let page = this.state.postPage;
-    if (direction === "next") {
+    if (direction === 'next') {
       page++;
       this.setState({ postPage: page });
     }
-    if (direction === "previous") {
+    if (direction === 'previous') {
       page--;
       this.setState({ postPage: page });
     }
-    fetch("http://localhost:8080/feed/posts?page=" + page, {
+    fetch('http://localhost:8080/feed/posts?page=' + page, {
       headers: {
-        Authorization: "Bearer " + this.props.token,
-      },
+        Authorization: 'Bearer ' + this.props.token
+      }
     })
-      .then((res) => {
+      .then(res => {
         if (res.status !== 200) {
-          throw new Error("Failed to fetch posts.");
+          throw new Error('Failed to fetch posts.');
         }
         return res.json();
       })
-      .then((resData) => {
+      .then(resData => {
         this.setState({
-          posts: resData.posts.map((post) => {
+          posts: resData.posts.map(post => {
             return {
               ...post,
-              imagePath: post.imageUrl,
+              imagePath: post.imageUrl
             };
           }),
           totalPosts: resData.totalItems,
-          postsLoading: false,
+          postsLoading: false
         });
       })
       .catch(this.catchError);
   };
-
   statusUpdateHandler = (event) => {
     event.preventDefault();
     fetch("http://localhost:8080/auth/status", {
@@ -261,26 +260,26 @@ class Feed extends Component {
         </section>
         <section className="feed">
           {this.state.postsLoading && (
-            <div style={{ textAlign: "center", marginTop: "2rem" }}>
+            <div style={{ textAlign: 'center', marginTop: '2rem' }}>
               <Loader />
             </div>
           )}
           {this.state.posts.length <= 0 && !this.state.postsLoading ? (
-            <p style={{ textAlign: "center" }}>No posts found.</p>
+            <p style={{ textAlign: 'center' }}>No posts found.</p>
           ) : null}
           {!this.state.postsLoading && (
             <Paginator
-              onPrevious={this.loadPosts.bind(this, "previous")}
-              onNext={this.loadPosts.bind(this, "next")}
+              onPrevious={this.loadPosts.bind(this, 'previous')}
+              onNext={this.loadPosts.bind(this, 'next')}
               lastPage={Math.ceil(this.state.totalPosts / 2)}
               currentPage={this.state.postPage}
             >
-              {this.state.posts.map((post) => (
+              {this.state.posts.map(post => (
                 <Post
                   key={post._id}
                   id={post._id}
-                  author={post.creator ? post.creator.name : "Unknown"}
-                  date={new Date(post.createdAt).toLocaleDateString("en-US")}
+                  author={post.creator.name}
+                  date={new Date(post.createdAt).toLocaleDateString('en-US')}
                   title={post.title}
                   image={post.imageUrl}
                   content={post.content}

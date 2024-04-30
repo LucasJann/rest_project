@@ -1,2 +1,2 @@
-Utilize this command in the front-end before 'npm start'
+Utilize this command in the front-end before 'npm install' and 'npm start'
 $env:NODE_OPTIONS = "--openssl-legacy-provider"
